@@ -1,5 +1,11 @@
+/* =========================================
+   Tailwind v4
+========================================= */
 @import "tailwindcss";
 
+/* =========================================
+   Reset mínimo + Accesibilidad
+========================================= */
 *,
 *::before,
 *::after {
@@ -10,27 +16,26 @@ html,
 body {
   margin: 0;
   padding: 0;
-  min-height: 100%;
 }
 
 img,
 svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
+video {
   display: block;
   max-width: 100%;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Focus visible accesible */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
-summary:focus-visible,
 [role="button"]:focus-visible,
 [tabindex]:not([tabindex="-1"]):focus-visible {
   outline: 2px solid var(--ring);
@@ -38,6 +43,7 @@ summary:focus-visible,
   border-radius: var(--radius);
 }
 
+/* Screen-reader only */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -50,16 +56,17 @@ summary:focus-visible,
   border: 0;
 }
 
+/* Skip link */
 .skip-link {
   position: absolute;
   left: -9999px;
   top: auto;
   z-index: 1000;
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   background: var(--surface);
   color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
 }
 
 .skip-link:focus,
@@ -68,30 +75,38 @@ summary:focus-visible,
   top: var(--space-4);
 }
 
+/* =========================================
+   Design Tokens — Dark Only
+========================================= */
 :root {
-  color-scheme: dark;
-
-  --bg: #0e1414;
-  --surface: #182323;
-
-  --text-primary: #ffffff;
-  --text-secondary: #9bd3bb;
-  --text-disabled: #6f9787;
-
-  --ui-border: #1e3d36;
-  --divider: #1e3d36;
-
+  /* Brand */
   --brand: #05cd98;
   --brand-contrast: #ffffff;
   --brand-rgb: 5, 205, 152;
 
+  /* Backgrounds */
+  --bg: #0e1414;
+  --surface: #182323;
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #9bd3bb;
+  --text-disabled: #6f8f85;
+
+  /* UI */
+  --ui-border: #1e3d36;
+  --divider: #1e3d36;
+
+  /* States */
   --error: #ec2149;
   --warning: #ffd700;
   --success: #05cd34;
   --info: #059ecd;
 
+  /* Layout */
   --container: 1120px;
 
+  /* Spacing */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -101,98 +116,82 @@ summary:focus-visible,
   --space-7: 48px;
   --space-8: 64px;
 
+  /* Radius */
   --radius: 14px;
+
+  /* =========================================
+     shadcn/ui Aliases
+  ========================================= */
 
   --background: var(--bg);
   --foreground: var(--text-primary);
+
   --card: var(--surface);
+  --card-foreground: var(--text-primary);
+
   --popover: var(--surface);
+  --popover-foreground: var(--text-primary);
+
   --primary: var(--brand);
   --primary-foreground: var(--brand-contrast);
+
+  --secondary: var(--surface);
+  --secondary-foreground: var(--text-primary);
+
   --muted: var(--surface);
   --muted-foreground: var(--text-secondary);
+
   --accent: var(--surface);
   --accent-foreground: var(--text-primary);
+
   --destructive: var(--error);
   --destructive-foreground: #ffffff;
+
   --border: var(--ui-border);
   --input: var(--ui-border);
   --ring: var(--brand);
 }
 
+/* =========================================
+   Tipografía base
+========================================= */
 body {
-  background: var(--bg);
-  color: var(--text-primary);
-  font-family: var(--font-poppins), system-ui, -apple-system, "Segoe UI", Roboto,
-    Arial, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 300;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+/* Headings sin márgenes */
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.875rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
 p {
   margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Spline Sans Mono", monospace;
-}
-
-h1 {
-  font-size: 4.5rem;
-  line-height: 6.25rem;
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 3rem;
-  line-height: 4rem;
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 2rem;
-  line-height: 2.625rem;
-  font-weight: 300;
-}
-
-h4 {
-  font-size: 1.5rem;
-  line-height: 2.125rem;
-  font-weight: 700;
-}
-
-h5 {
-  font-size: 1.25rem;
-  line-height: 1.875rem;
-  font-weight: 300;
-}
-
-h6 {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 300;
-}
-
-p {
-  font-size: 1.125rem;
-  line-height: 1.875rem;
-  letter-spacing: 0.0625rem;
-  font-weight: 300;
-}
-
+/* Utilidad tipográfica */
 .muted {
-  color: var(--text-secondary);
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
 }
